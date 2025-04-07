@@ -89,10 +89,10 @@ jobs:
         id: maven-version
         run: |
           echo "Version to be released: ${{ steps.version.outputs.version }}"
-          mvn org.eclipse.tycho:tycho-versions-plugin:set-version -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 -T 1C ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} -DnewVersion="${{ steps.version.outputs.version }}" -Dartifacts="robostar.robotool.customization.feature,robostar.robotool.product.standalone,robostar.robotool.customization.repository,robostar.robotool.customization"
+          mvn org.eclipse.tycho:tycho-versions-plugin:set-version -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} -DnewVersion="${{ steps.version.outputs.version }}" -Dartifacts="robostar.robotool.customization.feature,robostar.robotool.product.standalone,robostar.robotool.customization.repository,robostar.robotool.customization"
   
       - name: Build with Maven
-        run: mvn -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 -T 1C ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} -B package --file pom.xml
+        run: mvn -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} -B package --file pom.xml
 
       # Remove unwanted things from cache.
       - name: Save filtered Maven cache
