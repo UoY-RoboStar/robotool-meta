@@ -93,11 +93,12 @@ jobs:
       - name: Build with Maven
         run: mvn -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 -B package --file pom.xml
 
+      # Remove unwanted things from cache.
       - name: Save filtered Maven cache
         run: |
-          # Remove unwanted packages
           rm -rf ~/.m2/repository/circus
           rm -rf ~/.m2/repository/robostar
+          find ~/.m2/repository -name "*.lastUpdated" -delete
 
       - name: List P2 unit versions
         run: ./robotool-product/target/products/robotool.product/linux/gtk/x86_64/eclipse -application org.eclipse.equinox.p2.director -repository file:`realpath robotool-product/target/repository/` -list -lf "\${id} | \${version}" | grep -E '(circus\.|robostar|sirius|rcp)' | grep -v 'jar' > versions.md
