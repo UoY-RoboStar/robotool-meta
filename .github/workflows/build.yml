@@ -57,6 +57,12 @@ jobs:
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           settings-path: ${{ github.workspace }} # location for the settings.xml file
 
+      - name: Cache Maven repository
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: maven-filtered-cache-${{ hashFiles('pom.xml') }}
+          
       - if: ${{ github.ref == 'refs/heads/main' }}
         name: Bump version and push tag
         id: tag_version
@@ -86,6 +92,12 @@ jobs:
   
       - name: Build with Maven
         run: mvn -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 -B package --file pom.xml
+
+      - name: Save filtered Maven cache
+        run: |
+          # Remove unwanted packages
+          rm -rf ~/.m2/repository/circus
+          rm -rf ~/.m2/repository/robostar
 
       - name: List P2 unit versions
         run: ./robotool-product/target/products/robotool.product/linux/gtk/x86_64/eclipse -application org.eclipse.equinox.p2.director -repository file:`realpath robotool-product/target/repository/` -list -lf "\${id} | \${version}" | grep -E '(circus\.|robostar|sirius|rcp)' | grep -v 'jar' > versions.md
