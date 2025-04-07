@@ -61,7 +61,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
-          key: maven-filtered-cache-${{ hashFiles('pom.xml') }}
+          key: maven-filtered-cache-${{ hashFiles('**/pom.xml') }}
           
       - if: ${{ github.ref == 'refs/heads/main' }}
         name: Bump version and push tag
