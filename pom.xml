@@ -75,6 +75,7 @@
   <module>robochart-graphical</module>
   <!--TODO ADD YOUR MODULES HERE-->
   <module>robosim-metamodel</module>
+  <module>robosim-textual</module>
   <!--RoboTool product/repository modules below-->
   <module>robotool-feature</module>
   <module>robotool-customization</module>

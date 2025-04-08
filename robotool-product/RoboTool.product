@@ -47,16 +47,22 @@
       <feature id="org.eclipse.sirius.runtime" installMode="root"/>
       <feature id="org.eclipse.sirius.runtime.ide.ui" installMode="root"/>
       <feature id="org.eclipse.sirius.runtime.aql" installMode="root"/>
+      <!-- RoboTool: product customization features -->
       <feature id="robostar.robotool.customization.feature" installMode="root"/>
+      <!-- RoboTool: utilities -->
+      <!--<feature id="circus.robocalc.robotool.versioning.feature" installMode="root"/>-->
+      <!-- RoboChart -->
       <feature id="circus.robocalc.robochart.assertions.feature" installMode="root"/>
       <feature id="circus.robocalc.robochart.generator.csp.feature" installMode="root"/>
       <feature id="circus.robocalc.robochart.graphical.feature" installMode="root"/>
       <feature id="circus.robocalc.robochart.feature" installMode="root"/>
       <feature id="circus.robocalc.robochart.textual.feature" installMode="root"/>
-      <!--<feature id="circus.robocalc.robotool.versioning.feature" installMode="root"/>-->
       <feature id="org.eclipse.justj.openjdk.hotspot.jre.full" installMode="root"/>
       <!-- RoboSim: d-model features -->
       <feature id="circus.robocalc.robosim.feature" installMode="root"/>
+      <feature id="circus.robocalc.robosim.textual.feature" installMode="root"/>
+      <!-- RoboSim: p-model features -->
+      <!-- RoboChart/RoboSim: forbidden trace generator -->
    </features>
 
    <configurations>
