@@ -76,6 +76,9 @@
   <!--TODO ADD YOUR MODULES HERE-->
   <module>robosim-metamodel</module>
   <module>robosim-textual</module>
+  <module>robosim-graphical</module>
+  <module>robosim-assertions</module>
+  <module>robosim-csp-gen</module>
   <!--RoboTool product/repository modules below-->
   <module>robotool-feature</module>
   <module>robotool-customization</module>

@@ -61,6 +61,9 @@
       <!-- RoboSim: d-model features -->
       <feature id="circus.robocalc.robosim.feature" installMode="root"/>
       <feature id="circus.robocalc.robosim.textual.feature" installMode="root"/>
+      <feature id="circus.robocalc.robosim.assertions.feature" installMode="root"/>
+      <feature id="circus.robocalc.robosim.graphical.feature" installMode="root"/>
+      <feature id="circus.robocalc.robosim.generator.csp.feature" installMode="root"/>
       <!-- RoboSim: p-model features -->
       <!-- RoboChart/RoboSim: forbidden trace generator -->
    </features>

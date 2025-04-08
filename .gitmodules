@@ -19,3 +19,12 @@
 [submodule "robosim-textual"]
 	path = robosim-textual
 	url = git@github.com:UoY-RoboStar/robosim-textual.git
+[submodule "robosim-graphical"]
+	path = robosim-graphical
+	url = git@github.com:UoY-RoboStar/robosim-graphical.git
+[submodule "robosim-assertions"]
+	path = robosim-assertions
+	url = git@github.com:UoY-RoboStar/robosim-assertions.git
+[submodule "robosim-csp-gen"]
+	path = robosim-csp-gen
+	url = git@github.com:UoY-RoboStar/robosim-csp-gen.git
