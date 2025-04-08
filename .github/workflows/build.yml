@@ -156,6 +156,7 @@ jobs:
       packages: write
     container: 
       image: ghcr.io/uoy-robostar/robotool-dev-docker:main
+      options: --user github
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
