@@ -170,6 +170,10 @@ jobs:
         with:
           name: robochart-csp-gen
 
+      - name: List contents
+        run: |
+          ls -R
+          
       - name: Get FDR4 license
         uses: UoY-RoboStar/ga-activate-fdr@master
         with:
