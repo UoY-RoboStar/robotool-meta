@@ -16,3 +16,6 @@
 [submodule "robosim-metamodel"]
 	path = robosim-metamodel
 	url = git@github.com:UoY-RoboStar/robosim-metamodel.git
+[submodule "robosim-textual"]
+	path = robosim-textual
+	url = git@github.com:UoY-RoboStar/robosim-textual.git
