@@ -73,11 +73,13 @@
   <module>robochart-assertions</module>
   <module>robochart-csp-gen</module>
   <module>robochart-graphical</module>
+  <!--TODO ADD YOUR MODULES HERE-->
+  <module>robosim-metamodel</module>
+  <!--RoboTool product/repository modules below-->
   <module>robotool-feature</module>
   <module>robotool-customization</module>
   <module>robotool-customization-repository</module>
   <module>robotool-product</module>
   <module>robotool-repository</module>
-   <!--TODO ADD YOUR MODULES HERE-->
  </modules>
 </project>

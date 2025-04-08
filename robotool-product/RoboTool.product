@@ -55,6 +55,8 @@
       <feature id="circus.robocalc.robochart.textual.feature" installMode="root"/>
       <!--<feature id="circus.robocalc.robotool.versioning.feature" installMode="root"/>-->
       <feature id="org.eclipse.justj.openjdk.hotspot.jre.full" installMode="root"/>
+      <!-- RoboSim: d-model features -->
+      <feature id="circus.robocalc.robosim.feature" installMode="root"/>
    </features>
 
    <configurations>

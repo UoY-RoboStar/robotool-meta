@@ -13,3 +13,6 @@
 [submodule "robochart-graphical"]
 	path = robochart-graphical
 	url = git@github.com:UoY-RoboStar/robochart-graphical.git
+[submodule "robosim-metamodel"]
+	path = robosim-metamodel
+	url = git@github.com:UoY-RoboStar/robosim-metamodel.git
