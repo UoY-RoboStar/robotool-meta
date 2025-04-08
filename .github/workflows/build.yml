@@ -165,6 +165,10 @@ jobs:
         with:
           java-version: '11'
 
+      - name: List contents
+        run: |
+          ls -lR
+
       - name: Download robochart-csp-gen
         uses: actions/download-artifact@v4
         with:
@@ -172,7 +176,7 @@ jobs:
 
       - name: List contents
         run: |
-          ls -R
+          ls -lR
           
       - name: Get FDR4 license
         uses: UoY-RoboStar/ga-activate-fdr@master
