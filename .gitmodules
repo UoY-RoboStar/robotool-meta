@@ -28,3 +28,9 @@
 [submodule "robosim-csp-gen"]
 	path = robosim-csp-gen
 	url = git@github.com:UoY-RoboStar/robosim-csp-gen.git
+[submodule "prism-metamodel"]
+	path = prism-metamodel
+	url = git@github.com:UoY-RoboStar/prism-metamodel.git
+[submodule "robochart-prism-gen"]
+	path = robochart-prism-gen
+	url = git@github.com:UoY-RoboStar/robochart-prism-gen.git
