@@ -152,6 +152,8 @@ jobs:
         run: |
           mkdir -p robotool-repository/target/repository/metamodels
           cp robochart-metamodel/circus.robocalc.robochart/model/robochart.ecore robotool-repository/target/repository/metamodels/
+          cp robosim-metamodel/circus.robocalc.robosim/model/robosim.ecore robotool-repository/target/repository/metamodels/
+          cp prism-metamodel/circus.robocalc.robosim/model/prism.ecore robotool-repository/target/repository/metamodels/
       
       - if: ${{ github.ref == 'refs/heads/main' }}
         name: Store robotool-repository
