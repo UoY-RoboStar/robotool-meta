@@ -150,7 +150,7 @@ jobs:
   # Testing of RoboChart CSP generator
   test-robochart-csp-gen:
     needs: build
-    runs-on: robostar
+    runs-on: ubuntu-latest
     permissions:
       contents: write
       packages: write
