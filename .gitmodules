@@ -34,3 +34,12 @@
 [submodule "robochart-prism-gen"]
 	path = robochart-prism-gen
 	url = git@github.com:UoY-RoboStar/robochart-prism-gen.git
+[submodule "physmod-metamodel"]
+	path = physmod-metamodel
+	url = git@github.com:UoY-RoboStar/physmod-metamodel.git
+[submodule "physmod-textual"]
+	path = physmod-textual
+	url = git@github.com:UoY-RoboStar/physmod-textual.git
+[submodule "physmod-graphical"]
+	path = physmod-graphical
+	url = git@github.com:UoY-RoboStar/physmod-graphical.git

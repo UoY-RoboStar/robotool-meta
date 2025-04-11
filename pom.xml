@@ -74,7 +74,7 @@
   <module>robochart-graphical</module>
   <!--RoboChart: CSP support-->
   <module>robochart-csp-gen</module>
-  <!--RoboSim-->
+  <!--RoboSim: d-model -->
   <module>robosim-metamodel</module>
   <module>robosim-textual</module>
   <module>robosim-graphical</module>
@@ -84,6 +84,10 @@
   <!--RoboChart: PRISM support -->
   <module>prism-metamodel</module>
   <module>robochart-prism-gen</module>
+  <!--RoboSim: p-model -->
+  <module>physmod-metamodel</module>
+  <module>physmod-textual</module>
+  <module>physmod-graphical</module>
   <!--RoboTool product/repository modules below-->
   <module>robotool-feature</module>
   <module>robotool-customization</module>
