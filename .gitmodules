@@ -13,3 +13,39 @@
 [submodule "robochart-graphical"]
 	path = robochart-graphical
 	url = git@github.com:UoY-RoboStar/robochart-graphical.git
+[submodule "robosim-metamodel"]
+	path = robosim-metamodel
+	url = git@github.com:UoY-RoboStar/robosim-metamodel.git
+[submodule "robosim-textual"]
+	path = robosim-textual
+	url = git@github.com:UoY-RoboStar/robosim-textual.git
+[submodule "robosim-graphical"]
+	path = robosim-graphical
+	url = git@github.com:UoY-RoboStar/robosim-graphical.git
+[submodule "robosim-assertions"]
+	path = robosim-assertions
+	url = git@github.com:UoY-RoboStar/robosim-assertions.git
+[submodule "robosim-csp-gen"]
+	path = robosim-csp-gen
+	url = git@github.com:UoY-RoboStar/robosim-csp-gen.git
+[submodule "prism-metamodel"]
+	path = prism-metamodel
+	url = git@github.com:UoY-RoboStar/prism-metamodel.git
+[submodule "robochart-prism-gen"]
+	path = robochart-prism-gen
+	url = git@github.com:UoY-RoboStar/robochart-prism-gen.git
+[submodule "physmod-metamodel"]
+	path = physmod-metamodel
+	url = git@github.com:UoY-RoboStar/physmod-metamodel.git
+[submodule "physmod-textual"]
+	path = physmod-textual
+	url = git@github.com:UoY-RoboStar/physmod-textual.git
+[submodule "physmod-graphical"]
+	path = physmod-graphical
+	url = git@github.com:UoY-RoboStar/physmod-graphical.git
+[submodule "physmod-sdf-gen"]
+	path = physmod-sdf-gen
+	url = git@github.com:UoY-RoboStar/physmod-sdf-gen.git
+[submodule "physmod-cpc-gen"]
+	path = physmod-cpc-gen
+	url = git@github.com:UoY-RoboStar/physmod-cpc-gen.git
