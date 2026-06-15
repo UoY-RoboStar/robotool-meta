@@ -28,7 +28,9 @@ jobs:
           paths_ignore: '["**/README.md"]'
           do_not_skip: '["pull_request", "workflow_dispatch"]'
 
-  # This workflow contains a single job called "build"
+  ############################################################################
+  # Building RoboTool plug-ins with Maven.
+  ############################################################################
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -44,19 +46,30 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
         with:
           submodules: 'recursive'
-          token: ${{ secrets.ROBOSTAR_GITHUB_ACTIONS_TOKEN }}
+          token: ${{ secrets.SUBMODULE_TOKEN }}
+
+      - name: List tests
+        run: |
+          ls -R robochart-csp-gen/circus.robocalc.robochart.generator.csp.tests/robochart-tests
         
       - name: Set up JDK 11
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
           java-version: '11'
           distribution: 'temurin'
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           settings-path: ${{ github.workspace }} # location for the settings.xml file
 
+      - name: Cache Maven repository
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: ~/.m2/repository
+          key: maven-filtered-cache-${{ hashFiles('**/pom.xml') }}
+          
       - if: ${{ github.ref == 'refs/heads/main' }}
         name: Bump version and push tag
         id: tag_version
@@ -82,10 +95,17 @@ jobs:
         id: maven-version
         run: |
           echo "Version to be released: ${{ steps.version.outputs.version }}"
-          mvn org.eclipse.tycho:tycho-versions-plugin:set-version -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 -DnewVersion="${{ steps.version.outputs.version }}" -Dartifacts="robostar.robotool.customization.feature,robostar.robotool.product.standalone,robostar.robotool.customization.repository,robostar.robotool.customization"
+          mvn org.eclipse.tycho:tycho-versions-plugin:set-version -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} -DnewVersion="${{ steps.version.outputs.version }}" -Dartifacts="robostar.robotool.customization.feature,robostar.robotool.product.standalone,robostar.robotool.customization.repository,robostar.robotool.customization"
   
       - name: Build with Maven
-        run: mvn -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 -B package --file pom.xml
+        run: mvn -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} -B package --file pom.xml
+
+      # Remove unwanted things from cache.
+      - name: Save filtered Maven cache
+        run: |
+          rm -rf ~/.m2/repository/circus
+          rm -rf ~/.m2/repository/robostar
+          find ~/.m2/repository -name "*.lastUpdated" -delete
 
       - name: List P2 unit versions
         run: ./robotool-product/target/products/robotool.product/linux/gtk/x86_64/eclipse -application org.eclipse.equinox.p2.director -repository file:`realpath robotool-product/target/repository/` -list -lf "\${id} | \${version}" | grep -E '(circus\.|robostar|sirius|rcp)' | grep -v 'jar' > versions.md
@@ -102,12 +122,38 @@ jobs:
           retention-days: 1
           overwrite: true
 
+      - name: Store robochart-prism-gen
+        uses: actions/upload-artifact@v4
+        with:
+          name: robochart-prism-gen
+          include-hidden-files: true
+          path: |
+            robochart-prism-gen/run-tests.py
+            robochart-prism-gen/circus.robocalc.robochart.generator.prism.tests/
+            robochart-prism-gen/circus.robocalc.robochart.generator.prism/target/robochart_prism.jar
+          retention-days: 1
+          overwrite: true
+
+      - name: Store robosim-csp-gen
+        uses: actions/upload-artifact@v4
+        with:
+          name: robosim-csp-gen
+          include-hidden-files: true
+          path: |
+            robosim-csp-gen/run-tests.py
+            robosim-csp-gen/circus.robocalc.robosim.generator.csp.tests/
+            robosim-csp-gen/circus.robocalc.robosim.generator.csp/target/robosim.jar
+          retention-days: 1
+          overwrite: true
+
       # We only need to do the below if deploying. Can avoid it if we're just testing, for example.
       - if: ${{ github.ref == 'refs/heads/main' }}
         name: Store copy of metamodels
         run: |
           mkdir -p robotool-repository/target/repository/metamodels
           cp robochart-metamodel/circus.robocalc.robochart/model/robochart.ecore robotool-repository/target/repository/metamodels/
+          cp robosim-metamodel/circus.robocalc.robosim/model/robosim.ecore robotool-repository/target/repository/metamodels/
+          cp prism-metamodel/circus.robocalc.robosim/model/prism.ecore robotool-repository/target/repository/metamodels/
       
       - if: ${{ github.ref == 'refs/heads/main' }}
         name: Store robotool-repository
@@ -129,10 +175,12 @@ jobs:
           retention-days: 1
           overwrite: true
 
+  ############################################################################
   # Testing of RoboChart CSP generator
+  ############################################################################
   test-robochart-csp-gen:
     needs: build
-    runs-on: robostar
+    runs-on: ubuntu-latest
     permissions:
       contents: write
       packages: write
@@ -151,7 +199,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: robochart-csp-gen
-
+          
       - name: Get FDR4 license
         uses: UoY-RoboStar/ga-activate-fdr@master
         with:
@@ -182,10 +230,108 @@ jobs:
             name: robochart-csp-gen
             failOnError: false
 
+  ############################################################################
+  # Testing of RoboSim CSP generator
+  ############################################################################
+  test-robosim-csp-gen:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    container: 
+      image: ghcr.io/uoy-robostar/robotool-dev-docker:main
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Setup java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+
+      - name: Download robochart-csp-gen
+        uses: actions/download-artifact@v4
+        with:
+          name: robochart-csp-gen
+
+      - name: Get FDR4 license
+        uses: UoY-RoboStar/ga-activate-fdr@master
+        with:
+          name: 'RoboTool'
+          email: 'robotool@gmail.com'
+
+      # Assertion compression on
+      - name: Run FDR tests [default configuration with assertion compressions]
+        run: python3 run-tests.py -m -p --assertionComp
+
+      - name: Collect markdown output
+        run: cat output.md >> summary.md
+
+      # Same as above but with iteration and assertion compression on
+      - name: Run FDR tests [with compressions on]
+        run: python3 run-tests.py -m -p --iteratedComp --assertionComp
+
+      - name: Collect markdown output
+        run: cat output.md >> summary.md
+
+      - name: Create commit comment
+        uses: peter-evans/commit-comment@v3
+        with:
+          body-path: ./summary.md
+
+      - name: Delete robosim-csp-gen artifact
+        uses: geekyeggo/delete-artifact@v5
+        with:
+            name: robosim-csp-gen
+            failOnError: false  
+
+  ############################################################################
+  # Testing of RoboChart PRISM generator
+  ############################################################################
+  test-robochart-prism-gen:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    container: 
+      image: ghcr.io/uoy-robostar/robotool-dev-docker:main
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Setup java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+
+      - name: Download robochart-prism-gen
+        uses: actions/download-artifact@v4
+        with:
+          name: robochart-prism-gen
+
+      - name: Run PRISM tests
+        run: python3 run-tests.py -m
+
+      - name: Create commit comment
+        uses: peter-evans/commit-comment@v3
+        with:
+          body-path: ./output.md
+
+      - name: Delete robochart-prism-gen artifact
+        uses: geekyeggo/delete-artifact@v5
+        with:
+            name: robochart-prism-gen
+            failOnError: false  
+
+  ############################################################################
+  # Deployment of RoboTool repository
+  ############################################################################
   deploy-repository:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
-    needs: [build, test-robochart-csp-gen]
+    needs: [build, test-robochart-csp-gen, test-robosim-csp-gen, test-robochart-prism-gen]
     permissions:
       contents: write
       packages: write
@@ -237,11 +383,14 @@ jobs:
         with:
             name: robotool-repository
             failOnError: false
-          
+
+  ############################################################################
+  # Deployment and release of RoboTool product on GitHub Releases
+  ############################################################################
   deploy-product:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
-    needs: [build, test-robochart-csp-gen]
+    needs: [build, test-robochart-csp-gen, test-robosim-csp-gen, test-robochart-prism-gen]
     permissions:
       pull-requests: read
       contents: write
@@ -305,15 +454,30 @@ jobs:
             name: robotool-product
             failOnError: false
 
+  ############################################################################
+  # Cleaning up of artifacts from GitHub build
+  ############################################################################
   cleanup:
     if: always()
     runs-on: ubuntu-latest
-    needs: [build, test-robochart-csp-gen, deploy-product, deploy-repository]
+    needs: [build, test-robochart-csp-gen, test-robosim-csp-gen, test-robochart-prism-gen, deploy-product, deploy-repository]
     steps:
       - name: Delete robochart-csp-gen artifact
         uses: geekyeggo/delete-artifact@v5
         with:
             name: robochart-csp-gen
+            failOnError: false
+
+      - name: Delete robosim-csp-gen artifact
+        uses: geekyeggo/delete-artifact@v5
+        with:
+            name: robosim-csp-gen
+            failOnError: false
+
+      - name: Delete robosim-csp-gen artifact
+        uses: geekyeggo/delete-artifact@v5
+        with:
+            name: robochart-prism-gen
             failOnError: false
     
       - name: Delete robotool-repository artifact
