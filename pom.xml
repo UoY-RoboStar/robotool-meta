@@ -89,7 +89,7 @@
   <module>physmod-textual</module>
   <module>physmod-graphical</module>
   <module>physmod-sdf-gen</module>
-  <module>physmod-cpc-gen</module>
+  <!--<module>physmod-cpc-gen</module>-->
   <!--RoboTool product/repository modules below-->
   <module>robotool-feature</module>
   <module>robotool-customization</module>
