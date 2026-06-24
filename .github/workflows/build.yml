@@ -98,8 +98,15 @@ jobs:
           mvn org.eclipse.tycho:tycho-versions-plugin:set-version -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} -DnewVersion="${{ steps.version.outputs.version }}" -Dartifacts="robostar.robotool.customization.feature,robostar.robotool.product.standalone,robostar.robotool.customization.repository,robostar.robotool.customization"
   
       - name: Build with Maven
-        run: mvn -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 -Declipse.p2.mirrors=false ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} -B package --file pom.xml
-
+        run: |
+          mvn -Dtycho.version=2.7.5 \
+              -Dtycho-version=2.7.5 \
+              -Dmaven.wagon.http.retryHandler.count=5 \
+              -Dmaven.wagon.http.connectionTimeout=120000 \
+              -Dmaven.wagon.http.readTimeout=120000 \
+              -Declipse.p2.mirrors=false ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} \
+              -B package --file pom.xml -Dmaven.wagon.http.retryHandler.count=5
+          
       # Remove unwanted things from cache.
       - name: Save filtered Maven cache
         run: |
