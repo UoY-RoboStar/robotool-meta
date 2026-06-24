@@ -106,6 +106,12 @@ jobs:
               -Dmaven.wagon.http.readTimeout=120000 \
               -Declipse.p2.mirrors=false ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} \
               -B package --file pom.xml
+
+      - name: Locate Bad Files on Failure
+        if: failure()
+        run: |
+          echo "Scanning target folders for corrupted ZIP/JAR structures..."
+          find . -type f \( -name "*.jar" -o -name "*.zip" \) -exec sh -c 'unzip -t "{}" > /dev/null || echo "FOUND CORRUPTED FILE: {}"' \;
           
       # Remove unwanted things from cache.
       - name: Save filtered Maven cache
