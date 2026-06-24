@@ -105,7 +105,7 @@ jobs:
               -Dmaven.wagon.http.connectionTimeout=120000 \
               -Dmaven.wagon.http.readTimeout=120000 \
               -Declipse.p2.mirrors=false ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} \
-              -B package --file pom.xml -T 1C
+              -B package --file pom.xml
           
       # Remove unwanted things from cache.
       - name: Save filtered Maven cache
