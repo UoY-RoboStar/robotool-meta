@@ -225,8 +225,8 @@ jobs:
 
       - name: List and generate AutonomousChemicalDetector
         run: |
-          ls -l circus.robocalc.robochart.generator.csp.tests/robochart-tests/robochart
-          java -jar robochart.jar true true circus.robocalc.robochart.generator.csp.tests/robochart-tests/robochart/AutonomousChemicalDetector
+          ls -l circus.robocalc.robochart.generator.csp.tests/robochart-tests/robochart/AutonomousChemicalDetector
+          java -jar circus.robocalc.robochart.generator.csp/target/robochart.jar true true circus.robocalc.robochart.generator.csp.tests/robochart-tests/robochart/AutonomousChemicalDetector
 
       - name: Run FDR tests [default configuration]
         run: python3 run-tests.py -m -p
