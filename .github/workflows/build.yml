@@ -267,10 +267,10 @@ jobs:
         with:
           java-version: '11'
 
-      - name: Download robochart-csp-gen
+      - name: Download robosim-csp-gen
         uses: actions/download-artifact@v4
         with:
-          name: robochart-csp-gen
+          name: robosim-csp-gen
 
       - name: Get FDR4 license
         uses: UoY-RoboStar/ga-activate-fdr@master
