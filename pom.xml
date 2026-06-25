@@ -97,7 +97,7 @@
             <module>physmod-textual</module>
             <module>physmod-graphical</module>
             <module>physmod-sdf-gen</module>
-            <!--<module>physmod-cpc-gen</module>-->
+            <module>physmod-cpc-gen</module>
         </modules>
     </profile>
     <profile>
