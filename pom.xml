@@ -67,34 +67,49 @@
             </plugin>
      </plugins>
 </build>
-<modules>
-  <module>robochart-metamodel</module>
-  <module>robochart-textual</module>
-  <module>robochart-assertions</module>
-  <module>robochart-graphical</module>
-  <!--RoboChart: CSP support-->
-  <module>robochart-csp-gen</module>
-  <!--RoboSim: d-model -->
-  <module>robosim-metamodel</module>
-  <module>robosim-textual</module>
-  <module>robosim-graphical</module>
-  <module>robosim-assertions</module>
-  <!--RoboSim: CSP support-->
-  <module>robosim-csp-gen</module>
-  <!--RoboChart: PRISM support -->
-  <module>prism-metamodel</module>
-  <module>robochart-prism-gen</module>
-  <!--RoboSim: p-model -->
-  <module>physmod-metamodel</module>
-  <module>physmod-textual</module>
-  <module>physmod-graphical</module>
-  <module>physmod-sdf-gen</module>
-  <!--<module>physmod-cpc-gen</module>-->
-  <!--RoboTool product/repository modules below-->
-  <module>robotool-feature</module>
-  <module>robotool-customization</module>
-  <module>robotool-customization-repository</module>
-  <module>robotool-product</module>
-  <module>robotool-repository</module>
- </modules>
+<profiles>
+    <profile>
+        <id>core</id>
+        <modules>
+            <module>robochart-metamodel</module>
+            <module>robochart-textual</module>
+            <module>robochart-assertions</module>
+            <module>robochart-graphical</module>
+            <!--RoboChart: CSP support-->
+            <module>robochart-csp-gen</module>
+            <!--RoboChart: PRISM support -->
+            <module>prism-metamodel</module>
+            <module>robochart-prism-gen</module>
+            <!--RoboSim: d-model -->
+            <module>robosim-metamodel</module>
+            <module>robosim-textual</module>
+            <module>robosim-graphical</module>
+            <module>robosim-assertions</module>
+            <!--RoboSim: CSP support-->
+            <module>robosim-csp-gen</module>          
+        </modules>
+    </profile>
+    <profile>
+        <id>physmod</id>
+        <modules>
+            <!--RoboSim: p-model -->
+            <module>physmod-metamodel</module>
+            <module>physmod-textual</module>
+            <module>physmod-graphical</module>
+            <module>physmod-sdf-gen</module>
+            <!--<module>physmod-cpc-gen</module>-->
+        </modules>
+    </profile>
+    <profile>
+        <id>product</id>
+        <modules>
+            <!--RoboTool product/repository modules below-->
+            <module>robotool-feature</module>
+            <module>robotool-customization</module>
+            <module>robotool-customization-repository</module>
+            <module>robotool-product</module>
+            <module>robotool-repository</module>
+        </modules>
+    </profile>
+</profiles> 
 </project>

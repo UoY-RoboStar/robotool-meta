@@ -97,7 +97,7 @@ jobs:
           echo "Version to be released: ${{ steps.version.outputs.version }}"
           mvn org.eclipse.tycho:tycho-versions-plugin:set-version -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} -DnewVersion="${{ steps.version.outputs.version }}" -Dartifacts="robostar.robotool.customization.feature,robostar.robotool.product.standalone,robostar.robotool.customization.repository,robostar.robotool.customization"
   
-      - name: Build with Maven
+      - name: Build RoboTool (core) with Maven
         run: |
           mvn -Dtycho.version=2.7.5 \
               -Dtycho-version=2.7.5 \
@@ -105,14 +105,18 @@ jobs:
               -Dmaven.wagon.http.connectionTimeout=120000 \
               -Dmaven.wagon.http.readTimeout=120000 \
               -Declipse.p2.mirrors=false ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} \
-              -X package --file pom.xml
+              install -P core --file pom.xml
 
-      - name: Locate Bad Files on Failure
-        if: failure()
+      - name: Build RoboSim (physmod) and RoboTool product with Maven
         run: |
-          echo "Scanning target folders for corrupted ZIP/JAR structures..."
-          find . -type f \( -name "*.jar" -o -name "*.zip" \) -exec sh -c 'unzip -t "{}" > /dev/null || echo "FOUND CORRUPTED FILE: {}"' \;
-          
+          mvn -Dtycho.version=2.7.5 \
+              -Dtycho-version=2.7.5 \
+              -Dmaven.wagon.http.retryHandler.count=5 \
+              -Dmaven.wagon.http.connectionTimeout=120000 \
+              -Dmaven.wagon.http.readTimeout=120000 \
+              -Declipse.p2.mirrors=false ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} \
+              install -P physmod,product --file pom.xml
+ 
       # Remove unwanted things from cache.
       - name: Save filtered Maven cache
         run: |
