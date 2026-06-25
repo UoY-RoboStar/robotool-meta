@@ -87,16 +87,16 @@
             <module>robosim-assertions</module>
             <!--RoboSim: CSP support-->
             <module>robosim-csp-gen</module>          
+            <module>physmod-metamodel</module>
+            <module>physmod-textual</module>
+            <module>physmod-graphical</module>
+            <module>physmod-sdf-gen</module>
         </modules>
     </profile>
     <profile>
         <id>physmod</id>
         <modules>
             <!--RoboSim: p-model -->
-            <module>physmod-metamodel</module>
-            <module>physmod-textual</module>
-            <module>physmod-graphical</module>
-            <module>physmod-sdf-gen</module>
             <module>physmod-cpc-gen</module>
         </modules>
     </profile>
