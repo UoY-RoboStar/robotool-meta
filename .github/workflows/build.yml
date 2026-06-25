@@ -224,7 +224,7 @@ jobs:
           email: 'robotool@gmail.com'
 
       - name: Run FDR tests [default configuration]
-        run: python3 run-tests.py -m -p
+        run: python3 run-tests.py -m
 
       - name: Collect markdown output
         run: cat output.md >> summary.md
