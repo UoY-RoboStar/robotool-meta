@@ -197,7 +197,7 @@ jobs:
   ############################################################################
   test-robochart-csp-gen:
     needs: build
-    runs-on: robostarservice
+    runs-on: robostar
     permissions:
       contents: write
       packages: write
