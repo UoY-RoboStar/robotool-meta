@@ -197,7 +197,7 @@ jobs:
   ############################################################################
   test-robochart-csp-gen:
     needs: build
-    runs-on: robostar
+    runs-on: ubuntu-latest
     permissions:
       contents: write
       packages: write
@@ -226,7 +226,7 @@ jobs:
       - name: List and generate AutonomousChemicalDetector
         run: |
           ls -l circus.robocalc.robochart.generator.csp.tests/robochart-tests/robochart/AutonomousChemicalDetector
-          java -jar circus.robocalc.robochart.generator.csp/target/robochart.jar true true circus.robocalc.robochart.generator.csp.tests/robochart-tests/robochart/AutonomousChemicalDetector
+          java -XX:TieredStopAtLevel=1 -jar circus.robocalc.robochart.generator.csp/target/robochart.jar true true circus.robocalc.robochart.generator.csp.tests/robochart-tests/robochart/AutonomousChemicalDetector
 
       - name: Run FDR tests [default configuration]
         run: python3 run-tests.py -m -p
