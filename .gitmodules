@@ -79,3 +79,9 @@
 [submodule "roboarch-epsilon-robotool"]
 	path = roboarch-epsilon-robotool
 	url = git@github.com:UoY-RoboStar/roboarch-epsilon-robotool.git
+[submodule "robocert-metamodel"]
+	path = robocert-metamodel
+	url = git@github.com:UoY-RoboStar/robocert-metamodel.git
+[submodule "robocert-textual"]
+	path = robocert-textual
+	url = git@github.com:UoY-RoboStar/robocert-textual.git

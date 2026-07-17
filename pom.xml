@@ -102,6 +102,9 @@
 			<module>roboarch-metamodel-robotool</module>
 			<module>roboarch-textual-robotool</module>
 			<module>roboarch-epsilon-robotool</module>
+			<!--RoboCert-->
+			<module>robocert-metamodel</module>
+			<module>robocert-textual</module>
 			<!--RoboTool: versioning -->
 			<module>robotool-versioning</module>
         </modules>
