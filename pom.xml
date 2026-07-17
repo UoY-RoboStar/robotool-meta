@@ -95,8 +95,13 @@
             <module>physmod-textual</module>
             <module>physmod-graphical</module>
             <module>physmod-sdf-gen</module>
-			<!--RoboChart/RoboSim: trace generator -->
+			<!--RoboChart/RoboSim: forbidden traces -->
 			<module>robochart-trace-gen</module>
+			<module>robotest-textual</module>
+			<!--RoboArch-->
+			<module>roboarch-metamodel-robotool</module>
+			<module>roboarch-textual-robotool</module>
+			<module>roboarch-epsilon-robotool</module>
 			<!--RoboTool: versioning -->
 			<module>robotool-versioning</module>
         </modules>
