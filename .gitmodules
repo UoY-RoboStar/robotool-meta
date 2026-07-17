@@ -49,3 +49,12 @@
 [submodule "physmod-cpc-gen"]
 	path = physmod-cpc-gen
 	url = git@github.com:UoY-RoboStar/physmod-cpc-gen.git
+[submodule "robochart-exporter"]
+	path = robochart-exporter
+	url = git@github.com:UoY-RoboStar/robochart-exporter.git
+[submodule "robochart-importer"]
+	path = robochart-importer
+	url = git@github.com:UoY-RoboStar/robochart-importer.git
+[submodule "robochart-comparison"]
+	path = robochart-comparison
+	url = git@github.com:UoY-RoboStar/robochart-comparison.git

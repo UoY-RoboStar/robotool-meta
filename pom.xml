@@ -77,6 +77,10 @@
             <module>robochart-graphical</module>
             <!--RoboChart: CSP support-->
             <module>robochart-csp-gen</module>
+			<!--RoboChart: exporter/importer and comparison-->
+			<module>robochart-comparison</module>
+			<module>robochart-exporter</module>
+			<module>robochart-importer</module>
             <!--RoboChart: PRISM support -->
             <module>prism-metamodel</module>
             <module>robochart-prism-gen</module>
