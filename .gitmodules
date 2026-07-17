@@ -58,3 +58,24 @@
 [submodule "robochart-comparison"]
 	path = robochart-comparison
 	url = git@github.com:UoY-RoboStar/robochart-comparison.git
+[submodule "robochart-trace-gen"]
+	path = robochart-trace-gen
+	url = git@github.com:UoY-RoboStar/robochart-trace-gen.git
+[submodule "robotool-versioning"]
+	path = robotool-versioning
+	url = git@github.com:UoY-RoboStar/robotool-versioning.git
+[submodule "robotest-ros-gen"]
+	path = robotest-ros-gen
+	url = git@github.com:UoY-RoboStar/robotest-ros-gen.git
+[submodule "robotest-textual"]
+	path = robotest-textual
+	url = git@github.com:UoY-RoboStar/robotest-textual.git
+[submodule "roboarch-metamodel-robotool"]
+	path = roboarch-metamodel-robotool
+	url = git@github.com:UoY-RoboStar/roboarch-metamodel-robotool.git
+[submodule "roboarch-textual-robotool"]
+	path = roboarch-textual-robotool
+	url = git@github.com:UoY-RoboStar/roboarch-textual-robotool.git
+[submodule "roboarch-epsilon-robotool"]
+	path = roboarch-epsilon-robotool
+	url = git@github.com:UoY-RoboStar/roboarch-epsilon-robotool.git

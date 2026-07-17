@@ -95,6 +95,10 @@
             <module>physmod-textual</module>
             <module>physmod-graphical</module>
             <module>physmod-sdf-gen</module>
+			<!--RoboChart/RoboSim: trace generator -->
+			<module>robochart-trace-gen</module>
+			<!--RoboTool: versioning -->
+			<module>robotool-versioning</module>
         </modules>
     </profile>
     <profile>
