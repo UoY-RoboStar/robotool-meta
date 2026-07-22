@@ -95,6 +95,7 @@ jobs:
         id: maven-version
         env:
           MAVEN_OPTS: "--add-opens java.base/java.lang=ALL-UNNAMED"
+          JDK_JAVA_OPTIONS: "--add-opens=java.base/java.lang=ALL-UNNAMED"
         run: |
           echo "Version to be released: ${{ steps.version.outputs.version }}"
           mvn org.eclipse.tycho:tycho-versions-plugin:set-version -Dtycho.version=2.7.5 -Dtycho-version=2.7.5 ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} -DnewVersion="${{ steps.version.outputs.version }}" -Dartifacts="robostar.robotool.customization.feature,robostar.robotool.product.standalone,robostar.robotool.customization.repository,robostar.robotool.customization"
@@ -112,6 +113,7 @@ jobs:
       - name: Build RoboSim (physmod) and RoboTool product with Maven
         env:
           MAVEN_OPTS: "--add-opens java.base/java.lang=ALL-UNNAMED"
+          JDK_JAVA_OPTIONS: "--add-opens=java.base/java.lang=ALL-UNNAMED"
         run: |
           mvn -Dtycho.version=2.7.5 \
               -Dtycho-version=2.7.5 \
