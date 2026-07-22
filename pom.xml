@@ -41,6 +41,13 @@
                 <version>${tycho-version}</version>
                 <configuration>
                     <includePackedArtifacts>true</includePackedArtifacts>
+                    <target>
+                        <artifact>
+                            <groupId>robostar.robotool</groupId>
+                            <artifactId>robostar.robotool.target</artifactId>
+                            <version>1.0.0-SNAPSHOT</version>
+                        </artifact>
+                    </target>
                     <environments>
                         <environment>
                             <os>win32</os>
@@ -71,6 +78,7 @@
     <profile>
         <id>core</id>
         <modules>
+            <module>robotool-target</module>
             <module>robochart-metamodel</module>
             <module>robochart-textual</module>
             <module>robochart-assertions</module>
