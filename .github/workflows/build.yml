@@ -42,6 +42,11 @@ jobs:
     permissions:
       contents: write
       packages: write
+    container: 
+      image: ghcr.io/uoy-robostar/robotool-dev-docker:main
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
