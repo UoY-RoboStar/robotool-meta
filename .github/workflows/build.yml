@@ -116,11 +116,13 @@ jobs:
           MAVEN_OPTS: "--add-opens java.base/java.lang=ALL-UNNAMED"
           JDK_JAVA_OPTIONS: "--add-opens=java.base/java.lang=ALL-UNNAMED"
         run: |
-          mvn -Dtycho.version=2.7.5 \
+          mvn -B -ntp -Dtycho.version=2.7.5 \
               -Dtycho-version=2.7.5 \
-              -Dmaven.wagon.http.retryHandler.count=5 \
-              -Dmaven.wagon.http.connectionTimeout=120000 \
-              -Dmaven.wagon.http.readTimeout=120000 \
+              -Dmaven.wagon.http.connectionTimeout=30000 \
+              -Dmaven.wagon.http.readTimeout=60000 \
+              -Dmaven.wagon.http.retryHandler.count=3 \
+              -Dorg.eclipse.ecf.provider.filetransfer.retrieve.readTimeout=60000 \
+              -Dorg.eclipse.ecf.provider.filetransfer.retrieve.closeTimeout=30000 \
               -Declipse.p2.mirrors=false ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} \
               install -P core --file pom.xml
 
@@ -129,11 +131,13 @@ jobs:
           MAVEN_OPTS: "--add-opens java.base/java.lang=ALL-UNNAMED"
           JDK_JAVA_OPTIONS: "--add-opens=java.base/java.lang=ALL-UNNAMED"
         run: |
-          mvn -Dtycho.version=2.7.5 \
+          mvn -B -ntp -Dtycho.version=2.7.5 \
               -Dtycho-version=2.7.5 \
-              -Dmaven.wagon.http.retryHandler.count=5 \
-              -Dmaven.wagon.http.connectionTimeout=120000 \
-              -Dmaven.wagon.http.readTimeout=120000 \
+              -Dmaven.wagon.http.connectionTimeout=30000 \
+              -Dmaven.wagon.http.readTimeout=60000 \
+              -Dmaven.wagon.http.retryHandler.count=3 \
+              -Dorg.eclipse.ecf.provider.filetransfer.retrieve.readTimeout=60000 \
+              -Dorg.eclipse.ecf.provider.filetransfer.retrieve.closeTimeout=30000 \
               -Declipse.p2.mirrors=false ${{ steps.cache.outputs.cache-hit == 'true' && '-o' || '' }} \
               install -P physmod,product --file pom.xml
  
